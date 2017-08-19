@@ -10,3 +10,5 @@ router.get('/', function(){
 router.post('/', function(){
     console.log('made it to the get route');
 });
+
+module.exports = router;
