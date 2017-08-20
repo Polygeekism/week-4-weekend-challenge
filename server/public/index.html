@@ -1,12 +1,45 @@
 <!DOCTYPE html>
-<html> 
-    <head>
-        <title>Employee Salary Tracker</title>
-        <script src='vendors/angular.min.js'></script>
-        <script src='scripts/client.js'></script>
-        <link rel="stylesheet" href="scripts/styles.css">
-    </head>
-    <body>
-        <h1>We are doing the things!</h1>
-    </body>
+<html>
+
+<head>
+    <title>Employee Salary Tracker</title>
+    <script src='vendors/angular.min.js'></script>
+    <script src='scripts/client.js'></script>
+    <link rel="stylesheet" href="scripts/style.css">
+</head>
+
+<body ng-app='EmployeesApp' ng-controller='EmployeesController as vm'>
+    <h1>We are doing the things!</h1>
+    <div id='inputFields'>
+        <input type="text" id="firstName" placeholder="First Name" ng-model="vm.newEmployee.first_name">
+        <input type="text" id="lastName" placeholder="Last Name" ng-model="vm.newEmployee.last_name">
+        <input type="text" id="jobTitle" placeholder="Job Title" ng-model="vm.newEmployee.job_title">
+        <input type="number" id="salary" placeholder="Salary" ng-model="vm.newEmployee.salary"> <br>
+        <button id='newPerson' ng-click="vm.postNewEmployee()">Add New Employee</button>
+    </div>
+    <div id='listOfEmployees'>
+        <table>
+            <thead>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Job Title</th>
+                <th>Salary</th>
+            </thead>
+            <tbody>
+                <tr ng-repeat='employee in vm.employees'>
+                    <td>{{employee.first_name}}</td>
+                    <td>{{employee.last_name}}</td>
+                    <td>{{employee.job_title}}</td>
+                    <td>{{employee.salary}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div id='monthlyExpenditures'>
+        <h2>Monthly Salary Expenditures: {{vm.salaries}}</h2>
+    </div>
+
+</body>
+
 </html>

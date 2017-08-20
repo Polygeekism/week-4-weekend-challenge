@@ -1,8 +1,9 @@
 var express=require("express");
 var app = express();
-var port = 5000;
 var employees = require("./routes/employees")
 var bodyParser = require('body-parser');
+
+var port = 5000;
 
 app.use(express.static('./server/public'));
 app.use(bodyParser.json());
