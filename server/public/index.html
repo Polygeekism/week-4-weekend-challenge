@@ -31,7 +31,7 @@
                     <td>{{employee.last_name}}</td>
                     <td>{{employee.job_title}}</td>
                     <td>{{employee.salary}}</td>
-                    <td><button ng-click="vm.activeEmployee(employee.id, employee.is_active)">Active/Inactive</button></td>
+                    <td><button ng-click="vm.activeEmployee(employee.id, employee.is_active)"><span>{{employee.is_active ? 'Deactivate' :'Activate'}}</span></button></td>
                 </tr>
             </tbody>
         </table>
