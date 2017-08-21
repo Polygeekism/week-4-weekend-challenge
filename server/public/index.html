@@ -26,12 +26,12 @@
                 <th>Salary</th>
             </thead>
             <tbody>
-                <tr ng-repeat='employee in vm.employees'>
+                <tr ng-repeat='employee in vm.employees' ng-class='vm.whatClassIsIt(employee.is_active)'>
                     <td>{{employee.first_name}}</td>
                     <td>{{employee.last_name}}</td>
                     <td>{{employee.job_title}}</td>
                     <td>{{employee.salary}}</td>
-                    <td><button ng-click="vm.removeEmployee(employee.id)">Remove</button></td>
+                    <td><button ng-click="vm.activeEmployee(employee.id, employee.is_active)">Active/Inactive</button></td>
                 </tr>
             </tbody>
         </table>

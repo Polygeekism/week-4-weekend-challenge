@@ -10,6 +10,7 @@ router.get('/', function (req, res) {
             res.sendStatus(500);
         } else {
             client.query('SELECT * FROM employees', function (errorMakingQuery, result) {
+                done();
                 if (errorMakingQuery) {
                     console.log('error making query', errorMakingQuery);
                     res.sendStatus(500);
@@ -32,7 +33,8 @@ router.get('/salaries', function (req, res) {
             console.log('error connecting', errorConnecting);
             res.sendStatus(500);
         } else {
-            client.query('SELECT SUM(salary) FROM employees', function (errorMakingQuery, result) {
+            client.query('SELECT SUM(salary) FROM employees WHERE is_active=true', function (errorMakingQuery, result) {
+                done();
                 if (errorMakingQuery) {
                     console.log('error making query', errorMakingQuery);
                     res.sendStatus(500);
@@ -71,9 +73,43 @@ router.post('/', function (req, res) {
     })
 });
 
-router.delete('/:id', function(req, res){
-    var id = req.params.id;
-    console.log(id);
+// router.delete('/:id', function(req, res){
+//     var id = req.params.id;
+//     pool.connect(function (errorConnecting, client, done){
+//         if(errorConnecting){
+//             console.log('error connecting', errorConnecting);
+//             res.sendStatus(500);
+//         }else{
+//             client.query('DELETE FROM employees WHERE id = $1;',[id], function (errorMakingQuery, result){
+//                 done();
+//                 if(errorMakingQuery){
+//                     console.log('error making query', errorMakingQuery);
+//                     res.sendStatus(500);
+//                 }else{
+//                     res.sendStatus(200);
+//                 }
+//             })
+//         }
+//     })
+// })
+
+router.put('/', function(req, res){
+    pool.connect(function (errorConnecting, client, done){
+        if(errorConnecting){
+            console.log('error connecting', errorConnecting);
+            res.sendStatus(500);
+        }else{
+            client.query('UPDATE employees SET is_active = $2 WHERE id = $1',[req.body.id, req.body.active], function (errorMakingQuery, result){
+                done();
+                if(errorMakingQuery){
+                    console.log('error making query', errorMakingQuery);
+                    res.sendStatus(500);
+                }else{
+                    res.sendStatus(200);
+                }
+            })
+        }
+    })
 })
 
 module.exports = router;
