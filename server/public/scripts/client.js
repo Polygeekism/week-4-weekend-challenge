@@ -38,6 +38,15 @@ myApp.controller('EmployeesController', ['$http', function($http){
             self.newEmployee = {};
         })
     }
+    self.removeEmployee = function(id){
+        console.log(id);
+        $http({
+            method: 'DELETE',
+            url: 'employees/' + id
+        }).then( function(response){
+            self.getEmployees();
+        })
+    }
     
 
     self.getEmployees();

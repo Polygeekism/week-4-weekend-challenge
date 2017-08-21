@@ -71,4 +71,9 @@ router.post('/', function (req, res) {
     })
 });
 
+router.delete('/:id', function(req, res){
+    var id = req.params.id;
+    console.log(id);
+})
+
 module.exports = router;
